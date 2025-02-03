@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	dataChanMap, cancel, err := evdev.MonitorAllDevices()
+	dataChanMap, cancel, err := evdev.MonitorDevices(nil)
 	keyMap := evdev.GenerateKeyMap()
 	if err != nil {
 		log.Fatalf("Failed to monitor devices: %v", err)
