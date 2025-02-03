@@ -8,6 +8,7 @@ import (
 
 func main() {
 	dataChanMap, cancel, err := evdev.MonitorAllDevices()
+	keyMap := evdev.GenerateKeyMap()
 	if err != nil {
 		log.Fatalf("Failed to monitor devices: %v", err)
 	}
@@ -17,7 +18,7 @@ func main() {
 	for devicePath, dataChan := range dataChanMap {
 		go func(devicePath string, dataChan chan evdev.InputEvent) {
 			for event := range dataChan {
-				log.Printf("Device: %s, Event: %+v\n", devicePath, event)
+				log.Printf("Device: %s, Event: %+v\n", devicePath, keyMap[event.Code])
 			}
 		}(devicePath, dataChan)
 	}
