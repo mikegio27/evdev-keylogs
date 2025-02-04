@@ -34,11 +34,6 @@ func main() {
 	}
 	defer cancel()
 
-	if len(keyboardDevices) == 0 {
-		fmt.Println("No keyboard devices found.")
-		return
-	}
-
 	// Handle the data from the channels
 	for devicePath, dataChan := range dataChanMap {
 		go func(devicePath string, dataChan chan evdev.InputEvent) {
